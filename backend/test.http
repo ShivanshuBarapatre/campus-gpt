@@ -1,0 +1,15 @@
+### Create user
+POST http://127.0.0.1:5000/user
+Content-Type: application/json
+
+{
+  "username": "shiv"
+}
+
+### Add XP
+POST http://127.0.0.1:5000/user/1/xp
+Content-Type: application/json
+
+{
+  "xp": 50
+}
