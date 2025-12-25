@@ -3,36 +3,38 @@ import axios from "axios";
 import Leaderboard from "./Leaderboard";
 
 function App() {
+  const USER_ID = 1; // temporary (auth later)
+
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [xpInfo, setXpInfo] = useState("");
 
   const sendMessage = async () => {
     if (!input) return;
 
-    setMessages(prev => [...prev, { role: "user", text: input }]);
+    setMessages(prev => [...prev, { role: "You", text: input }]);
 
     const res = await axios.post("http://127.0.0.1:5000/chat", {
+      user_id: USER_ID,
       message: input
     });
 
     setMessages(prev => [
       ...prev,
-      { role: "bot", text: res.data.reply }
+      { role: "CAMPUS GPT", text: res.data.reply }
     ]);
 
+    setXpInfo(`🎉 +${res.data.xp_gained} XP | Level ${res.data.level}`);
     setInput("");
   };
 
   return (
     <div>
-      <h1>CAMPUS GPT</h1>
+      <h1>🎓 CAMPUS GPT</h1>
 
-      {/* Chat Section */}
       <div>
         {messages.map((m, i) => (
-          <p key={i}>
-            <b>{m.role}:</b> {m.text}
-          </p>
+          <p key={i}><b>{m.role}:</b> {m.text}</p>
         ))}
       </div>
 
@@ -43,9 +45,9 @@ function App() {
       />
       <button onClick={sendMessage}>Send</button>
 
-      <hr />
+      <p>{xpInfo}</p>
 
-      {/* Leaderboard Section */}
+      <hr />
       <Leaderboard />
     </div>
   );

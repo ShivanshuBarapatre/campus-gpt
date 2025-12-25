@@ -1,15 +1,12 @@
-### Create user
-POST http://127.0.0.1:5000/user
+### Get Leaderboard
+GET http://127.0.0.1:5000/leaderboard
+
+
+### Chat + XP Test
+POST http://127.0.0.1:5000/chat
 Content-Type: application/json
 
 {
-  "username": "shiv"
-}
-
-### Add XP
-POST http://127.0.0.1:5000/user/1/xp
-Content-Type: application/json
-
-{
-  "xp": 50
+  "user_id": 1,
+  "message": "Explain normalization in DBMS"
 }
