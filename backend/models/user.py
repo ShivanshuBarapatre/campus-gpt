@@ -10,4 +10,5 @@ class User(db.Model):
     streak = db.Column(db.Integer, default=0)
 
     is_public = db.Column(db.Boolean, default=True)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
